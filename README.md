@@ -13,3 +13,7 @@ folder with a `SKILL.md`, and ready-to-upload `.skill` files are in the domain's
 - **Claude.ai / desktop app**: Settings → Capabilities → Skills → upload the `.skill` file.
 
 The skills contain only general know-how: no data from anyone's installation (no IP, id, password or name).
+
+## License
+
+[MIT](LICENSE): free to use, modify and share, with no warranty.
