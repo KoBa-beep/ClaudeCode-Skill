@@ -6,6 +6,7 @@ folder with a `SKILL.md`, and ready-to-upload `.skill` files are in the domain's
 | Folder | Skills | Domain |
 |---|---|---|
 | [`fibaro-hc3/`](fibaro-hc3/README.md) | `hc3-quickapp`, `hc3-lua-scenes`, `hc3-packaging`, `hc3-icons` | Fibaro Home Center 3 / Yubii Home: QuickApps (Lua), Lua scenes, `.fqa` packaging, device icons |
+| [`neeo-meta/`](neeo-meta/README.md) | `neeo-meta-driver` | NEEO remote with the meta engine (jac459): JSON drivers, listeners, discovery, directories, Node-RED / MQTT companion services, log diagnosis |
 
 ## Install a skill
 - **Claude Code, one project**: copy the skill folder into `<project>/.claude/skills/`.

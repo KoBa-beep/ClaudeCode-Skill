@@ -1,0 +1,197 @@
+{
+  "name": "My Device",
+  "manufacturer": "MyBrand",
+  "type": "AVRECEIVER",
+  "version": 1,
+  "discover": {
+    "welcomeheadertext": "My Device",
+    "welcomedescription": "powered by meta",
+    "command": {
+      "type": "static",
+      "command": ".",
+      "queryresult": "$.*"
+    }
+  },
+  "template": {
+    "dynamicname": "DYNAMIK_INST_START My Device DYNAMIK_INST_END",
+    "dynamicid": "DYNAMIK_INST_START MyDevice01 DYNAMIK_INST_END",
+    "variables": {
+      "DeviceIP": "192.168.1.50",
+      "MyStatus": " ",
+      "IsMuted": false,
+      "Volume": 0,
+      "ListenerOn": false
+    },
+    "labels": {
+      "CurrentStatus": {
+        "label": "Status",
+        "listen": "MyStatus"
+      }
+    },
+    "sliders": {
+      "VOLUME": {
+        "label": "",
+        "unit": "%",
+        "listen": "Volume",
+        "evaldo": [
+          {
+            "test": true,
+            "then": "__VOLUMESET"
+          },
+          {
+            "test": "DYNAMIK !$ListenerOn",
+            "then": "__LISTEN"
+          }
+        ]
+      }
+    },
+    "listeners": {
+      "DeviceStatus": {
+        "type": "http-get",
+        "command": "http://$DeviceIP/api/status",
+        "pooltime": "3000",
+        "poolduration": "",
+        "queryresult": "$.",
+        "evalwrite": [
+          {
+            "variable": "Volume",
+            "value": "DYNAMIK let r = {}; if (\"$Result\" != \"undefined\") { try { r = JSON.parse(\"$Result\"); } catch (e) {} } if (Array.isArray(r)) { r = r[0] || {}; } let v = Number(r.volume); isNaN(v) ? $Volume : Math.round(v);"
+          },
+          {
+            "variable": "MyStatus",
+            "value": "DYNAMIK let r = {}; if (\"$Result\" != \"undefined\") { try { r = JSON.parse(\"$Result\"); } catch (e) {} } if (Array.isArray(r)) { r = r[0] || {}; } let t = String(r.status || \"\").replace(/[\\u0000-\\u001f]/g, \" \").replace(/\\\\/g, \"/\").replace(/\"/g, \"'\").replace(/\\$/g, \"\\uFF04\"); t ? t : \" \";"
+          }
+        ]
+      }
+    },
+    "buttons": {
+      "__LISTEN": {
+        "type": "static",
+        "command": ".",
+        "evalwrite": [
+          {
+            "variable": "ListenerOn",
+            "value": true
+          }
+        ],
+        "evaldo": [
+          {
+            "test": true,
+            "then": "__INITIALISE"
+          }
+        ]
+      },
+      "POWER ON": {
+        "type": "http-get",
+        "command": "http://$DeviceIP/api/power?state=on",
+        "evalwrite": [
+          {
+            "variable": "MyStatus",
+            "value": "Power on sent"
+          }
+        ],
+        "evaldo": [
+          {
+            "test": "DYNAMIK !$ListenerOn",
+            "then": "__LISTEN"
+          }
+        ]
+      },
+      "POWER OFF": {
+        "type": "http-get",
+        "command": "http://$DeviceIP/api/power?state=off",
+        "evalwrite": [
+          {
+            "variable": "MyStatus",
+            "value": "Power off sent"
+          }
+        ],
+        "evaldo": [
+          {
+            "test": "DYNAMIK !$ListenerOn",
+            "then": "__LISTEN"
+          }
+        ]
+      },
+      "VOLUME UP": {
+        "type": "static",
+        "command": "",
+        "evalwrite": [
+          {
+            "variable": "Volume",
+            "value": "DYNAMIK ($Volume < 95) ? $Volume + 5 : 100"
+          }
+        ],
+        "evaldo": [
+          {
+            "test": true,
+            "then": "__VOLUMESET"
+          },
+          {
+            "test": "DYNAMIK !$ListenerOn",
+            "then": "__LISTEN"
+          }
+        ]
+      },
+      "VOLUME DOWN": {
+        "type": "static",
+        "command": "",
+        "evalwrite": [
+          {
+            "variable": "Volume",
+            "value": "DYNAMIK ($Volume > 5) ? $Volume - 5 : 0"
+          }
+        ],
+        "evaldo": [
+          {
+            "test": true,
+            "then": "__VOLUMESET"
+          },
+          {
+            "test": "DYNAMIK !$ListenerOn",
+            "then": "__LISTEN"
+          }
+        ]
+      },
+      "MUTE TOGGLE": {
+        "type": "static",
+        "command": "",
+        "evaldo": [
+          {
+            "test": "DYNAMIK !$IsMuted",
+            "then": "__MUTEON",
+            "or": "__MUTEOFF"
+          },
+          {
+            "test": "DYNAMIK !$ListenerOn",
+            "then": "__LISTEN"
+          }
+        ]
+      },
+      "__MUTEON": {
+        "type": "http-get",
+        "command": "http://$DeviceIP/api/mute?enable=true",
+        "evalwrite": [
+          {
+            "variable": "IsMuted",
+            "value": true
+          }
+        ]
+      },
+      "__MUTEOFF": {
+        "type": "http-get",
+        "command": "http://$DeviceIP/api/mute?enable=false",
+        "evalwrite": [
+          {
+            "variable": "IsMuted",
+            "value": false
+          }
+        ]
+      },
+      "__VOLUMESET": {
+        "type": "http-get",
+        "command": "DYNAMIK \"http://$DeviceIP/api/volume?level=\" + Math.round(Number($Volume))"
+      }
+    }
+  }
+}

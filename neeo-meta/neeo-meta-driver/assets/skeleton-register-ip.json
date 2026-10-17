@@ -1,0 +1,84 @@
+{
+  "name": "My Receiver",
+  "manufacturer": "MyBrand",
+  "type": "AVRECEIVER",
+  "version": 1,
+  "compatible-meta": "1.0.4",
+  "persistedvariables": {
+    "MyDevices": "[]",
+    "IsRegistered": false
+  },
+  "variables": {
+    "DeviceIP": ""
+  },
+  "register": {
+    "registerheadertext": "My Receiver",
+    "registerdescription": "Enter the IP address of the device, for example 192.168.1.50",
+    "command": {
+      "type": "static",
+      "command": ".",
+      "queryresult": "$.*"
+    }
+  },
+  "discover": {
+    "welcomeheadertext": "My Receiver",
+    "welcomedescription": "powered by meta",
+    "initcommandset": [
+      {
+        "type": "static",
+        "command": "$RegistrationCode",
+        "queryresult": "",
+        "evalwrite": [
+          {
+            "variable": "DeviceIP",
+            "value": "$Result"
+          }
+        ]
+      },
+      {
+        "type": "http-rest",
+        "command": "{\"verb\":\"get\",\"call\":\"http://$DeviceIP/api/info\"}",
+        "queryresult": "$.",
+        "evalwrite": [
+          {
+            "variable": "MyDevices",
+            "value": "DYNAMIK let l = $MyDevices; if (\"$Result\" != \"undefined\") { let r = JSON.parse(\"$Result\"); if (Array.isArray(r)) { r = r[0]; }; if (r && r.name && l.findIndex(i => i.ip == \"$DeviceIP\") == -1) { l.push({\"ip\":\"$DeviceIP\",\"name\":r.name}); } }; JSON.stringify(l);"
+          },
+          {
+            "variable": "IsRegistered",
+            "value": "DYNAMIK \"$Result\" != \"undefined\""
+          }
+        ],
+        "evaldo": [
+          {
+            "test": "DYNAMIK $IsRegistered",
+            "then": "__PERSIST",
+            "or": ""
+          }
+        ]
+      }
+    ],
+    "command": {
+      "type": "static",
+      "command": "$MyDevices",
+      "queryresult": "$.*"
+    }
+  },
+  "template": {
+    "dynamicname": "DYNAMIK_INST_START DYNAMIK JSON.parse(\"$Result\").name DYNAMIK_INST_END",
+    "dynamicid": "DYNAMIK_INST_START DYNAMIK JSON.parse(\"$Result\").ip DYNAMIK_INST_END",
+    "variables": {
+      "DeviceIP": "DYNAMIK_INST_START DYNAMIK JSON.parse(\"$Result\").ip DYNAMIK_INST_END"
+    },
+    "buttons": {
+      "POWER ON": {
+        "type": "http-get",
+        "command": "http://$DeviceIP/api/power?state=on"
+      },
+      "POWER OFF": {
+        "type": "http-get",
+        "command": "http://$DeviceIP/api/power?state=off"
+      }
+    }
+  }
+}
