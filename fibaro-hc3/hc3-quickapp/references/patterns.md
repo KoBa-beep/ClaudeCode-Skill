@@ -219,6 +219,11 @@ end
 ```
   JSON object keys are strings: convert back with `tonumber(k)`.
 - Colour devices: save `color` ("r,g,b,w") and `value`; blink with a timer, cap the blinking duration.
+- "Stop the alarm" must stop what is **already running**, not only prevent the next repeat: a siren file already playing
+  on a speaker goes on until its end (30 s or more) unless the speaker QA exposes a "stop the current sound" method
+  (call it, and only when a sound is playing, so the user's music is never stopped). Put colour devices back to their
+  saved state on stop: users read a light left red as "the alarm is still on". Test stop *and* restore in the
+  simulator, including "restore" pressed without "stop" first, and delayed actions that run after the saved state was cleared.
 - Provide test buttons ("Test fire") that run the full chain with a "TEST" prefix in every message.
 
 ## 11. Daily report and journal

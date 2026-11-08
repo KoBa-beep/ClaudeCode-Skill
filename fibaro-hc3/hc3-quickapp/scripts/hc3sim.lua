@@ -356,11 +356,12 @@ fibaro = {
         if type(id) == "table" then for _, i in ipairs(id) do callDevice(i, action, ...) end return end
         callDevice(id, action, ...)
     end,
-    getValue = function(id, prop) local d = dev(id) if d then return d[prop or "value"] end end,
-    get = function(id, prop) local d = dev(id) if d then return d[prop or "value"], d.modified or clock end end,
-    getName = function(id) local d = dev(id) return d and d.name end,
-    getType = function(id) local d = dev(id) return d and d.type end,
-    getRoomID = function(id) local d = dev(id) return d and d.roomID end,
+    -- like the HC3: an unknown device or property gives an explicit nil (tonumber(fibaro.getValue(…)) must not fail)
+    getValue = function(id, prop) local d = dev(id) if d then return d[prop or "value"] end return nil end,
+    get = function(id, prop) local d = dev(id) if d then return d[prop or "value"], d.modified or clock end return nil, nil end,
+    getName = function(id) local d = dev(id) return d and d.name or nil end,
+    getType = function(id) local d = dev(id) return d and d.type or nil end,
+    getRoomID = function(id) local d = dev(id) return d and d.roomID or nil end,
     getRoomName = function(roomId) for _, r in ipairs(sim.rooms) do if r.id == roomId then return r.name end end end,
     getRoomNameByDeviceID = function(id)
         local d = dev(id)
