@@ -4,6 +4,7 @@
 
 - `svg/` : sources vectorielles 40×40
 - `png/40/` : PNG 40×40 (taille native)
+- `idbs-polar-icons.zip` : archive prête à télécharger (svg + png + README)
 - `png/16/` : PNG 16×16 (taille habituelle d'un arbre Windows, si le client lourd en a besoin)
 
 ![Aperçu](preview.png)
