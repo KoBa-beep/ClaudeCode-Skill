@@ -80,13 +80,17 @@ G = {
 # pictogrammes des expériences / documents (zone utile ~ x 11-29 / y 13-33)
 D = {
     "experiment_analytical": f'<path d="M11 31h18" {w(1.6)}/><path d="M11.5 30c2 0 2.5-1.5 3.3-6 .8-4.5 1.2-9 2.2-9s1.4 4.5 2.2 9c.8 4.5 1.3 6 3.3 6 1.4 0 1.8-1 2.5-3.5.6-2.2 1-3.5 1.6-3.5s1 1.3 1.4 3.5c.3 1.6.7 3.5 1.5 3.5" {w(2)}/>',
-    # microscope réduit + erlenmeyer (recherche avancée / Grand Projet Stratégique)
-    "experiment_gps": f'<g transform="translate(-1 0)"><g transform="translate(-2.5 1) scale(.82) translate(2.6 4)">'
-                      f'<path d="M17.5 13.5l4 2.3-4.2 7.3-4-2.3z" {F}/><path d="M15.2 22.3l-1.3 2.2" {w(2.4)}/>'
-                      f'<path d="M20.5 26a5 5 0 0 0 4.5-7.5" {w(2.2)}/><path d="M12 32.5h14M17 29.5h7M21 29.5v-3" {w(2.2)}/></g>'
-                      f'<path d="M27 21.5v3.2l-3.2 6.1a1.2 1.2 0 0 0 1.1 1.7h6.2a1.2 1.2 0 0 0 1.1-1.7L29 24.7v-3.2z" {F} stroke="#039be5" stroke-width="1"/>'
-                      f'<path d="M26.3 21.5h3.4" {w(1.6)}/>'
-                      f'<path d="M25.2 29h5.6l.9 1.8a.6.6 0 0 1-.5.9h-6.4a.6.6 0 0 1-.5-.9z" fill="#039be5" opacity=".55"/></g>',
+    # microscope (oculaire incliné, bras en C, platine, socle) + erlenmeyer
+    "experiment_gps": f'<g transform="translate(-1.5 0)">'
+                      f'<path d="M18.5 17.2c4.2.4 6.8 3.4 6.8 7.3 0 2.6-1.1 4.6-3 5.8" {w(2.8)}/>'
+                      f'<g transform="rotate(-32 16.5 19)"><rect x="14.6" y="13.5" width="3.8" height="10" rx=".8" {F}/>'
+                      f'<rect x="13.8" y="12" width="5.4" height="2.4" rx=".7" {F}/><rect x="15.4" y="23" width="2.2" height="2.6" rx=".5" {F}/></g>'
+                      f'<circle cx="19.2" cy="18.2" r="1.7" fill="#039be5"/><circle cx="19.2" cy="18.2" r="1" {F}/>'
+                      f'<rect x="13" y="26" width="10" height="2" rx=".8" {F}/><rect x="11.5" y="30.3" width="15" height="2.6" rx="1.3" {F}/>'
+                      f'<path d="M21.6 28v2.5" {w(2.6)}/></g>'
+                      f'<path d="M28 23v2.6l-2.8 5.3a1.1 1.1 0 0 0 1 1.6h5.6a1.1 1.1 0 0 0 1-1.6L30 25.6V23z" {F} stroke="#039be5" stroke-width="1.1"/>'
+                      f'<path d="M27.3 23h3.4" {w(1.5)}/>'
+                      f'<path d="M26.4 29.6h5.2l.8 1.5a.5.5 0 0 1-.4.8h-5.8a.5.5 0 0 1-.4-.8z" fill="#039be5" opacity=".55"/>',
     "experiment_microbio": f'<ellipse cx="20" cy="24" rx="9" ry="8" {w(2)}/>'
                            f'<rect x="13.5" y="19" width="7" height="3.6" rx="1.8" transform="rotate(-25 17 20.8)" {F}/>'
                            f'<rect x="19.5" y="25" width="7" height="3.6" rx="1.8" transform="rotate(20 23 26.8)" {F}/>'
