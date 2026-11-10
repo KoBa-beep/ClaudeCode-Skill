@@ -80,7 +80,13 @@ G = {
 # pictogrammes des expériences / documents (zone utile ~ x 11-29 / y 13-33)
 D = {
     "experiment_analytical": f'<path d="M11 31h18" {w(1.6)}/><path d="M11.5 30c2 0 2.5-1.5 3.3-6 .8-4.5 1.2-9 2.2-9s1.4 4.5 2.2 9c.8 4.5 1.3 6 3.3 6 1.4 0 1.8-1 2.5-3.5.6-2.2 1-3.5 1.6-3.5s1 1.3 1.4 3.5c.3 1.6.7 3.5 1.5 3.5" {w(2)}/>',
-    "experiment_gps": f'<path d="M20 33s-7-7.2-7-12.5a7 7 0 0 1 14 0C27 25.8 20 33 20 33z" {F}/><circle cx="20" cy="20.5" r="2.8" fill="#0288d1"/>',
+    "experiment_gps": f'<g transform="rotate(40 20 23)">'
+                      f'<path d="M20 12.5c3.6 2.6 5 6.6 5 10.5v5.5h-10V23c0-3.9 1.4-7.9 5-10.5z" {F}/>'
+                      f'<circle cx="20" cy="20.5" r="1.9" fill="#039be5"/>'
+                      f'<path d="M15 23.5l-3 3.5v3.5l3-1.5zM25 23.5l3 3.5v3.5l-3-1.5z" {F}/>'
+                      f'<path d="M18 29.8h4l-.6 2.8h-2.8z" fill="#ffca28"/>'
+                      f'</g>'
+                      f'<path d="M12.5 33l2.2-2.2M10.5 29.5l2-2M16 34.5l1.6-1.6" {w(1.4, ' opacity=".8"')}/>',
     "experiment_microbio": f'<ellipse cx="20" cy="24" rx="9" ry="8" {w(2)}/>'
                            f'<rect x="13.5" y="19" width="7" height="3.6" rx="1.8" transform="rotate(-25 17 20.8)" {F}/>'
                            f'<rect x="19.5" y="25" width="7" height="3.6" rx="1.8" transform="rotate(20 23 26.8)" {F}/>'
