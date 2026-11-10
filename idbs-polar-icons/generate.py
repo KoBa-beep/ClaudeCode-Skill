@@ -80,8 +80,13 @@ G = {
 # pictogrammes des expériences / documents (zone utile ~ x 11-29 / y 13-33)
 D = {
     "experiment_analytical": f'<path d="M11 31h18" {w(1.6)}/><path d="M11.5 30c2 0 2.5-1.5 3.3-6 .8-4.5 1.2-9 2.2-9s1.4 4.5 2.2 9c.8 4.5 1.3 6 3.3 6 1.4 0 1.8-1 2.5-3.5.6-2.2 1-3.5 1.6-3.5s1 1.3 1.4 3.5c.3 1.6.7 3.5 1.5 3.5" {w(2)}/>',
-    "experiment_gps": f'<path d="M17.5 13.5l4 2.3-4.2 7.3-4-2.3z" {F}/><path d="M15.2 22.3l-1.3 2.2" {w(2.2)}/>'
-                      f'<path d="M20.5 26a5 5 0 0 0 4.5-7.5" {w(2)}/><path d="M12 32.5h16M17 29.5h8M21 29.5v-3" {w(2)}/>',
+    # microscope réduit + erlenmeyer (recherche avancée / Grand Projet Stratégique)
+    "experiment_gps": f'<g transform="translate(-1 0)"><g transform="translate(-2.5 1) scale(.82) translate(2.6 4)">'
+                      f'<path d="M17.5 13.5l4 2.3-4.2 7.3-4-2.3z" {F}/><path d="M15.2 22.3l-1.3 2.2" {w(2.4)}/>'
+                      f'<path d="M20.5 26a5 5 0 0 0 4.5-7.5" {w(2.2)}/><path d="M12 32.5h14M17 29.5h7M21 29.5v-3" {w(2.2)}/></g>'
+                      f'<path d="M27 21.5v3.2l-3.2 6.1a1.2 1.2 0 0 0 1.1 1.7h6.2a1.2 1.2 0 0 0 1.1-1.7L29 24.7v-3.2z" {F} stroke="#039be5" stroke-width="1"/>'
+                      f'<path d="M26.3 21.5h3.4" {w(1.6)}/>'
+                      f'<path d="M25.2 29h5.6l.9 1.8a.6.6 0 0 1-.5.9h-6.4a.6.6 0 0 1-.5-.9z" fill="#039be5" opacity=".55"/></g>',
     "experiment_microbio": f'<ellipse cx="20" cy="24" rx="9" ry="8" {w(2)}/>'
                            f'<rect x="13.5" y="19" width="7" height="3.6" rx="1.8" transform="rotate(-25 17 20.8)" {F}/>'
                            f'<rect x="19.5" y="25" width="7" height="3.6" rx="1.8" transform="rotate(20 23 26.8)" {F}/>'

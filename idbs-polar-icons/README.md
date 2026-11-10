@@ -33,7 +33,7 @@
 | DOMAIN | `svg/domain.svg` | Dossier indigo, cible |
 | AXIS | `svg/axis.svg` | Dossier indigo clair, axes + courbe |
 | EXPERIMENT_ANALYTICAL | `svg/experiment_analytical.svg` | Page bleu nuit, chromatogramme |
-| EXPERIMENT_GPS | `svg/experiment_gps.svg` | Grand Projet Stratégique / recherche avancée — page bleu ciel, microscope (recherche) |
+| EXPERIMENT_GPS | `svg/experiment_gps.svg` | Grand Projet Stratégique / recherche avancée — page bleu ciel, microscope + flacon de labo (recherche) |
 | EXPERIMENT_MICROBIO | `svg/experiment_microbio.svg` | Page verte, boîte de Petri |
 | EXPERIMENT | `svg/experiment.svg` | Page bleue, cahier de laboratoire |
 | TEMPLATE | `svg/template.svg` | Page gris-bleu, mise en page |
