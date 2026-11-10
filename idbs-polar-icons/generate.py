@@ -31,6 +31,14 @@ def folder(main, dark, glyph="", title=""):
     return svg(body, title)
 
 
+def doc(main, dark, glyph="", title=""):
+    """Page à coin plié : réservée aux expériences et documents."""
+    body = (f'<path d="M9.5 2.5H25l8.5 8.5v24a2.5 2.5 0 0 1-2.5 2.5H9.5A2.5 2.5 0 0 1 7 35V5a2.5 2.5 0 0 1 2.5-2.5z" fill="{main}"/>'
+            f'<path d="M25 2.5V9a2 2 0 0 0 2 2h6.5z" fill="{dark}"/>'
+            f'{glyph}')
+    return svg(body, title)
+
+
 # ---------- pictogrammes (zone utile ~ x 11-29 / y 16-32) ----------
 person = lambda cx, cy, s=1.0: (f'<circle cx="{cx}" cy="{cy - 3.2*s:.1f}" r="{2.8*s:.1f}" {F}/>'
                                 f'<path d="M{cx - 5.2*s:.1f} {cy + 5.5*s:.1f}a{5.2*s:.1f} {5.2*s:.1f} 0 0 1 {10.4*s:.1f} 0z" {F}/>')
@@ -68,6 +76,33 @@ G = {
     "collaboration_idbs": f'<circle cx="16.5" cy="24" r="5.2" {W}/><circle cx="23.5" cy="24" r="5.2" {W}/>'
                           f'<path d="M20 20.2a5.2 5.2 0 0 1 0 7.6 5.2 5.2 0 0 1 0-7.6z" {F}/>',
 }
+
+# pictogrammes des expériences / documents (zone utile ~ x 11-29 / y 13-33)
+D = {
+    "experiment_analytical": f'<path d="M11 31h18" {w(1.6)}/><path d="M11.5 30c2 0 2.5-1.5 3.3-6 .8-4.5 1.2-9 2.2-9s1.4 4.5 2.2 9c.8 4.5 1.3 6 3.3 6 1.4 0 1.8-1 2.5-3.5.6-2.2 1-3.5 1.6-3.5s1 1.3 1.4 3.5c.3 1.6.7 3.5 1.5 3.5" {w(2)}/>',
+    "experiment_gps": f'<path d="M20 33s-7-7.2-7-12.5a7 7 0 0 1 14 0C27 25.8 20 33 20 33z" {F}/><circle cx="20" cy="20.5" r="2.8" fill="#0288d1"/>',
+    "experiment_microbio": f'<ellipse cx="20" cy="24" rx="9" ry="8" {w(2)}/>'
+                           f'<rect x="13.5" y="19" width="7" height="3.6" rx="1.8" transform="rotate(-25 17 20.8)" {F}/>'
+                           f'<rect x="19.5" y="25" width="7" height="3.6" rx="1.8" transform="rotate(20 23 26.8)" {F}/>'
+                           f'<circle cx="24" cy="20" r="1.4" {F}/><circle cx="15.5" cy="27.5" r="1.2" {F}/>',
+    "experiment": f'<rect x="13" y="14" width="15" height="19" rx="1.5" {w(2)}/><path d="M11 18h4M11 22.5h4M11 27h4M11 31h4" {w(1.8)}/>'
+                  f'<path d="M18.5 19h6M18.5 23h6M18.5 27h4" {w(1.6)}/>',
+    "template": f'<rect x="12" y="14.5" width="16" height="5" rx="1" {F}/>'
+                f'<rect x="12" y="22" width="7" height="10" rx="1" {w(1.6, ' stroke-dasharray="2 1.6"')}/>'
+                f'<path d="M21.5 23h6.5M21.5 26.5h6.5M21.5 30h4.5" {w(1.8)}/>',
+    "report": f'<path d="M11.5 32.5h17" {w(1.8)}/><rect x="12.5" y="24" width="3.6" height="7" rx=".6" {F}/>'
+              f'<rect x="18.2" y="18.5" width="3.6" height="12.5" rx=".6" {F}/><rect x="23.9" y="21.5" width="3.6" height="9.5" rx=".6" {F}/>'
+              f'<path d="M12 20.5l6-5 5 3 5.5-4.5" {w(1.6)}/>',
+}
+
+DOCS = [
+    ("experiment_analytical", "EXPERIMENT_ANALYTICAL", "#283593", "#1a237e"),
+    ("experiment_gps", "EXPERIMENT_GPS", "#039be5", "#0277bd"),
+    ("experiment_microbio", "EXPERIMENT_MICROBIO", "#2e7d32", "#1b5e20"),
+    ("experiment", "EXPERIMENT", "#5c7cfa", "#3b5bdb"),
+    ("template", "TEMPLATE", "#78909c", "#546e7a"),
+    ("report", "REPORT", "#f57c00", "#e65100"),
+]
 
 # (nom fichier, libellé, couleur face, couleur onglet)
 FOLDERS = [
@@ -114,9 +149,12 @@ def main():
         (OUT / f"{name}.svg").write_text(svg(body, label)); items.append((name, label))
     for name, label, main_c, dark in FOLDERS:
         (OUT / f"{name}.svg").write_text(folder(main_c, dark, G[name], label)); items.append((name, label))
+    for name, label, main_c, dark in DOCS:
+        (OUT / f"{name}.svg").write_text(doc(main_c, dark, D[name], label)); items.append((name, label))
     order = ["root", "group", "category", "collaboration_idbs", "project", "user", "shared_group", "web_search",
              "templates_folder", "templates_sub_folder", "landing_page", "trash", "folder", "subfolder", "subsubfolder",
-             "year", "month", "gamme", "axis_domain", "domain", "axis"]
+             "year", "month", "gamme", "axis_domain", "domain", "axis",
+             "experiment_analytical", "experiment_gps", "experiment_microbio", "experiment", "template", "report"]
     lab = dict(items)
     cells = "".join(
         f'<figure><img src="svg/{n}.svg" width="40" height="40"><img src="svg/{n}.svg" width="20" height="20">'

@@ -1,6 +1,10 @@
 # Icônes IDBS Polar — dossiers de l'arborescence
 
-21 icônes SVG 40×40 px (fond transparent, sans police externe sauf le « 31 » de MONTH en Arial) pour les types de dossiers de l'arborescence Polar.
+27 icônes 40×40 px pour l'arborescence Polar (21 dossiers + 6 expériences/documents), en **SVG** (client web) et en **PNG transparent** (client lourd).
+
+- `svg/` : sources vectorielles 40×40
+- `png/40/` : PNG 40×40 (taille native)
+- `png/16/` : PNG 16×16 (taille habituelle d'un arbre Windows, si le client lourd en a besoin)
 
 ![Aperçu](preview.png)
 
@@ -27,13 +31,25 @@
 | AXIS_DOMAIN | `svg/axis_domain.svg` | Dossier indigo foncé, organigramme |
 | DOMAIN | `svg/domain.svg` | Dossier indigo, cible |
 | AXIS | `svg/axis.svg` | Dossier indigo clair, axes + courbe |
+| EXPERIMENT_ANALYTICAL | `svg/experiment_analytical.svg` | Page bleu nuit, chromatogramme |
+| EXPERIMENT_GPS | `svg/experiment_gps.svg` | Page bleu ciel, repère de localisation |
+| EXPERIMENT_MICROBIO | `svg/experiment_microbio.svg` | Page verte, boîte de Petri |
+| EXPERIMENT | `svg/experiment.svg` | Page bleue, cahier de laboratoire |
+| TEMPLATE | `svg/template.svg` | Page gris-bleu, mise en page |
+| REPORT | `svg/report.svg` | Page orange, graphique |
 
 ## Logique couleur
 - Rouge : organisation (GROUP, CATEGORY) — reprend les icônes rouges actuelles.
 - Jaune : rangement générique (FOLDER, SUBFOLDER, SUBSUBFOLDER).
 - Turquoise : rangement chronologique (YEAR, MONTH).
 - Indigo dégradé foncé → clair : hiérarchie AXIS_DOMAIN → DOMAIN → AXIS.
-- Violet : modèles.
+- Violet : dossiers de modèles.
+- Forme « page à coin plié » = expérience ou document ; forme « dossier » = conteneur. Les couleurs des expériences reprennent celles des icônes Polar actuelles (bleu nuit, bleu ciel, vert).
 
 ## Modifier / régénérer
-Couleurs et pictogrammes sont définis dans `generate.py` : `python3 generate.py` réécrit `svg/` et `preview.html`.
+Couleurs et pictogrammes sont définis dans `generate.py` :
+
+```
+python3 generate.py   # réécrit svg/ et preview.html
+node export_png.js    # réécrit png/40 et png/16 (Playwright + Chromium)
+```
